@@ -17,7 +17,7 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?region=FR&key=<%= @api_key %>"></script>
     <script type="text/javascript">
       var center = "France";
-      var offer_groups = <%= JSON.generate(OFFERS_BY_COORDS) %>;
+      var offer_groups = <%= JSON.generate(@offers) %>;
     </script>
     <script type="text/javascript" src="script.js"></script>
     <% end %>

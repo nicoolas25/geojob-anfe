@@ -37,6 +37,7 @@ GEM
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
+    rake (11.2.2)
     rest-client (2.0.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
@@ -63,6 +64,7 @@ PLATFORMS
 
 DEPENDENCIES
   rack
+  rake
   sinatra
   wombat (~> 2.5)
 

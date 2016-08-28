@@ -6,7 +6,7 @@ function fillResultsWith(offers) {
   for (var offer in offers) {
     offer = offers[offer]
 
-    buffer += '<a class="offer" href="http://www.anfe.fr/component/offresemploi/' + offer.reference + '?view=offre" target="_blank">';
+    buffer += '<a class="offer" href="' + offer.url + '" target="_blank">';
     buffer += '<span class="type">' + offer.type + '</span> - ';
     buffer += '<span class="name">' + offer.name + '</span>';
     buffer += '<div class="city">(' + offer.city + ')</div>';
@@ -15,13 +15,13 @@ function fillResultsWith(offers) {
   $('#results').html(buffer);
 }
 
-function iconFor(offer) {
-  if (offer.type === "CDD") {
-    return "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
-  } else if (offer.type === "CDI") {
-    return "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
-  } else {
+function iconFor(newest_offer) {
+  if (newest_offer.age < 5) {
+    return "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+  } else if (newest_offer.age < 15) {
     return "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+  } else {
+    return "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
   }
 }
 
@@ -30,9 +30,9 @@ function insertMarkers() {
     if (offer_groups.hasOwnProperty(coords)) {
       (function(coords) {
         var offers = offer_groups[coords];
-        var offer = offers[0];;
+        var offer = offers[offers.length - 1];;
         var marker = new google.maps.Marker({
-          position: { lat: offer.coords[0], lng: offer.coords[1] },
+          position: { lat: offer.lat, lng: offer.lng },
           icon: iconFor(offer),
           map: map,
           title: 'Résulats (' + offers.length + ')',
