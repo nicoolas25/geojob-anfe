@@ -4,6 +4,8 @@ class Offer
 
   attr_reader :name, :city, :zipcode, :type, :created_at, :url, :lat, :lng
 
+  attr_accessor :provider
+
   def initialize(hash)
     ATTRIBUTES.each do |attr|
       instance_variable_set("@#{attr}", hash[attr] || hash[attr.to_s])

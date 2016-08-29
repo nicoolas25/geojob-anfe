@@ -26,7 +26,11 @@ class Store
 
   def saved_offers
     hashes = pstore.transaction { pstore[:offers] }
-    hashes && hashes.map { |hash| Offer.new(hash) }
+    hashes && hashes.map do |hash|
+      Offer.new(hash).tap do |offer|
+        offer.provider = @provider.class.provider_id
+      end
+    end
   end
 
   def retrieve_offers
@@ -41,7 +45,7 @@ class Store
 
   def filename
     date_prefix = Date.today.strftime("%Y%m%d")
-    provider_name = @provider.class.name.split('::').last.downcase
+    provider_name = @provider.class.provider_id
     "#{date_prefix}-#{provider_name}-jobs.pstore"
   end
 end

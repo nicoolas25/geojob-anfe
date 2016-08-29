@@ -8,8 +8,17 @@ module Provider
   # In exchange this Base class will keep the Offer's dependency
   # in one place and provide the `fetch_offers` public method.
   class Base
+
+    def self.provider_id
+      name.split('::').last.downcase
+    end
+
     def fetch_offers
-      offers_hashes.map { |hash| Offer.new(hash) }
+      offers_hashes.map do |hash|
+        Offer.new(hash).tap do |offer|
+          offer.provider = self.class.provider_id
+        end
+      end
     end
 
     protected

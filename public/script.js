@@ -7,6 +7,7 @@ function fillResultsWith(offers) {
     offer = offers[offer]
 
     buffer += '<a class="offer" href="' + offer.url + '" target="_blank">';
+    buffer += '<img src="' + offer.provider + '-logo.png"/>';
     buffer += '<span class="name">' + offer.name + '</span><br />';
     buffer += '<span class="type">' + offer.type + '</span> - ';
     buffer += '<span class="city">' + offer.city + '</span> - ';

@@ -44,6 +44,7 @@ class Geojob < Sinatra::Base
     offer_hash = offer.to_hash.tap do |hash|
       if offer.created_at.kind_of?(Date)
         hash[:age] = (Date.today - offer.created_at).to_i
+        hash[:provider] = offer.provider
       end
     end
   end
