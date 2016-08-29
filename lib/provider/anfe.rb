@@ -1,32 +1,32 @@
 require "wombat"
-require_relative "../offer"
+require "provider/base"
 
 module Provider
-  class ANFE
-    BASE_URL = "http://www.anfe.fr".freeze
-    JOBLIST_PATH = "/index.php/component/offresemploi/?view=offres"
-    JOB_PATH_TEMPLATE = "/component/offresemploi/%s?view=offre"
+  class ANFE < Base
 
-    def fetch_offers
-      offers_hashes.map { |hash| Offer.new(hash) }
-    end
-
-    private
+    protected
 
     def offers_hashes
       offers_index.map do |offer|
         puts "Loading offer..."
+        reference = offer.fetch("reference")
         details = Wombat.crawl do
           base_url BASE_URL
-          path JOB_PATH_TEMPLATE % [ offer.fetch("reference") ]
+          path JOB_PATH_TEMPLATE % [ reference ]
 
-          address %{xpath=//form[@id="offreForm"]//fieldset[2]/li[2]/text()[3]}
           type %{xpath=//form[@id="offreForm"]//fieldset[3]/li[1]/text()[3]}
         end
-        details[:url] = (BASE_URL + JOB_PATH_TEMPLATE) % offer.fetch("reference")
+        details.delete("reference")
+        details["url"] = (BASE_URL + JOB_PATH_TEMPLATE) % [ reference ]
         offer.merge(details)
       end
     end
+
+    private
+
+    BASE_URL = "http://www.anfe.fr".freeze
+    JOBLIST_PATH = "/index.php/component/offresemploi/?view=offres"
+    JOB_PATH_TEMPLATE = "/component/offresemploi/%s?view=offre"
 
     def offers_index
       Wombat.crawl do

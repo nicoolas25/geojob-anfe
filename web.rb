@@ -4,8 +4,11 @@ require "json"
 require "sinatra/base"
 
 require "provider/anfe"
+require "provider/fhf"
 require "zipcode_locator/csv"
 require "store"
+
+PROVIDERS = [ Provider::ANFE, Provider::FHF ]
 
 class Geojob < Sinatra::Base
   get '/' do
@@ -29,10 +32,12 @@ class Geojob < Sinatra::Base
   end
 
   def offers_array
-    Store.new({
-      provider: Provider::ANFE.new,
-      locator: ZipcodeLocator::CSV.new,
-    }).offers
+    PROVIDERS.map do |provider_class|
+      Store.new({
+        provider: provider_class.new,
+        locator: ZipcodeLocator::CSV.new,
+      }).offers
+    end.flatten(1)
   end
 
   def decorate_offer(offer)
