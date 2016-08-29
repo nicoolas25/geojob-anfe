@@ -7,10 +7,10 @@
     <style type="text/css">
       html { height: 100% }
       body { height: 100%; margin: 0; padding: 0 }
-      #left-panel { float: left; width: 30%; height: 100% }
+      #left-panel { float: left; width: 30%; height: 100%; box-sizing: border-box; padding: 10px }
       #map-canvas { float: left; width: 70%; height: 100% }
       #results a { display: block; clear: both; font-size: 95%; margin-bottom: 10px; }
-      #results a .city { font-size: 75%; }
+      #results a .city, #results a .date, #results a .type { font-size: 75%; }
     </style>
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
     <% if @api_key %>

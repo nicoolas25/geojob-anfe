@@ -7,9 +7,10 @@ function fillResultsWith(offers) {
     offer = offers[offer]
 
     buffer += '<a class="offer" href="' + offer.url + '" target="_blank">';
+    buffer += '<span class="name">' + offer.name + '</span><br />';
     buffer += '<span class="type">' + offer.type + '</span> - ';
-    buffer += '<span class="name">' + offer.name + '</span>';
-    buffer += '<div class="city">(' + offer.city + ')</div>';
+    buffer += '<span class="city">' + offer.city + '</span> - ';
+    buffer += '<span class="date">' + offer.created_at + '</span>';
     buffer += '</a>';
   }
   $('#results').html(buffer);
