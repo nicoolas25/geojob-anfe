@@ -19,11 +19,15 @@ function fillResultsWith(offers) {
 
 function iconFor(newest_offer) {
   if (newest_offer.age < 5) {
-    return "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+    return "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|ff5722";
   } else if (newest_offer.age < 15) {
-    return "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+    return "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|ffc107";
+  } else if (newest_offer.age < 30) {
+    return "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|ffeb3b";
+  } else if (newest_offer.age < 45) {
+    return "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|cddc39";
   } else {
-    return "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+    return "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|9e9e9e";
   }
 }
 
