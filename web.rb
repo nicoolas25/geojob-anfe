@@ -6,7 +6,7 @@ require "sinatra/base"
 require "provider/anfe"
 require "provider/fhf"
 require "zipcode_locator/csv"
-require "store"
+require "store/pstore"
 
 PROVIDERS = [ Provider::ANFE, Provider::FHF ]
 
@@ -33,7 +33,7 @@ class Geojob < Sinatra::Base
 
   def offers_array
     PROVIDERS.map do |provider_class|
-      Store.new({
+      Store::PStore.new({
         provider: provider_class.new,
         locator: ZipcodeLocator::CSV.new,
       }).offers
