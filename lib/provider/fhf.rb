@@ -31,6 +31,7 @@ module Provider
     def offers_hashes
       offers_index.map do |offer|
         puts "Loading offer #{offer["url"]}"
+        random_wait
         details = Wombat.crawl do
           base_url BASE_URL
           path offer["url"][BASE_URL.size .. -1]
@@ -79,6 +80,12 @@ module Provider
           city("css=span.hopital span") { |c| c.gsub(/[()]/, "") }
         end
       end
+    end
+
+    def random_wait
+      delay = 2 + (rand(3000) / 1000)
+      puts "Wait #{delay} seconds to seems a real person"
+      sleep delay
     end
   end
 end
