@@ -15,7 +15,7 @@ module Store
       hashes = pstore.transaction { pstore[:offers] }
       hashes && hashes.map do |hash|
         Offer.new(hash).tap do |offer|
-          offer.provider = @provider.class.provider_id
+          offer.provider = provider_id
         end
       end
     end

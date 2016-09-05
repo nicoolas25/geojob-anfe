@@ -41,7 +41,9 @@ module Store
 
     def parse_offer(row)
       hash_offer = JSON.parse(row[:offer])
-      Offer.new(hash_offer)
+      Offer.new(hash_offer).tap do |offer|
+        offer.provider = provider_id
+      end
     end
   end
 end
