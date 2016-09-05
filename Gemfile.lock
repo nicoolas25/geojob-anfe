@@ -36,6 +36,7 @@ GEM
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
     ntlm-http (0.1.1)
+    pg (0.18.4)
     pkg-config (1.1.7)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -52,6 +53,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    sequel (4.35.0)
     sinatra (1.4.7)
       rack (~> 1.5)
       rack-protection (~> 1.4)
@@ -74,9 +76,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  pg
   pry-byebug
   rack
   rake
+  sequel
   sinatra
   wombat (~> 2.5)
 

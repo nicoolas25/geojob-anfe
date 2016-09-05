@@ -23,11 +23,15 @@ module Store
 
     protected
 
+    def provider_id
+      @provider.provider_id
+    end
+
     def saved_offers
       raise "The #{self.class.name} should implement the #store method"
     end
 
-    def post_initialize
+    def post_initialize(options)
       # Subclass this to handle custom initialization options
     end
 

@@ -1,2 +1,3 @@
-require_relative 'web'
+require_relative "web"
+
 run Geojob

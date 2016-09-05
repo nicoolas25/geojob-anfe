@@ -13,6 +13,10 @@ module Provider
       name.split('::').last.downcase
     end
 
+    def provider_id
+      self.class.provider_id
+    end
+
     def fetch_offers
       offers_hashes.map do |hash|
         Offer.new(hash).tap do |offer|
