@@ -14,14 +14,12 @@
       #results a .city, #results a .date, #results a .type { font-size: 75%; }
     </style>
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <% if @api_key %>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?region=FR&key=<%= @api_key %>"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?region=FR<% if @api_key %>&key=<%= @api_key %><% end %>"></script>
     <script type="text/javascript">
       var center = "France";
       var offer_groups = <%= JSON.generate(@offers) %>;
     </script>
     <script type="text/javascript" src="script.js"></script>
-    <% end %>
   </head>
   <body>
     <div id="left-panel">
